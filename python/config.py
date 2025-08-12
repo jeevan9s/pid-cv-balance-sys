@@ -2,7 +2,7 @@
 
 # SERIAL
 # ----------------
-SERIAL_PORT = "COM3"
+SERIAL_PORT = 'COM3'
 BAUD_RATE = 115200
 
 # CAM
@@ -24,8 +24,8 @@ PID_Y = {"kp":1.0, "ki":0.0, "kd": 0.0}
 
 # SERVO
 # ----------------
-SERVO_X_NEUTRAL = 135
-SERVO_Y_NEUTRAL = 135
+SERVO_X_NEUTRAL = 93
+SERVO_Y_NEUTRAL = 125
 
 SERVO_X_MAX = 160
 SERVO_X_MIN = 100

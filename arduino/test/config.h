@@ -5,14 +5,14 @@
 
 /* SERVO PINS
  ---------------- */
- #define SERVO_X_PIN 2
- #define SERVO_Y_PIN 4
+ #define SERVO_X_PIN 4
+ #define SERVO_Y_PIN 2
 
 
 /* SERVO POS
  ---------------- */
-#define SERVO_X_NEUTRAL 135
-#define SERVO_Y_NEUTRAL 135
+#define SERVO_X_NEUTRAL 93
+#define SERVO_Y_NEUTRAL 125
 
 #define SERVO_X_MAX 160
 #define SERVO_X_MIN 100

@@ -1,1 +1,0 @@
-// general motor testing program
