@@ -11,8 +11,8 @@
 
 /* SERVO POS
  ---------------- */
-#define SERVO_X_NEUTRAL 93
-#define SERVO_Y_NEUTRAL 125
+#define SERVO_X_NEUTRAL 85
+#define SERVO_Y_NEUTRAL 135
 
 #define SERVO_X_MAX 160
 #define SERVO_X_MIN 100
@@ -21,4 +21,4 @@
 
 
 #define BAUD_RATE 115200
-#endifk
+#endif
