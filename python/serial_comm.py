@@ -50,9 +50,6 @@ class SerialComm:
         except Exception as e:
             print(f"failed to send message: {e}")
             return False
-            
-    
-            
     
     def disconnect(self):
         if self.ser and self.ser.is_open:
