@@ -2,7 +2,8 @@
 import cv2
 import numpy as np 
 import time 
-from typing import Callable, Optional, Tuple
+from typing import Callable, Optional
+import config as cfg
 
 
 class Vision:
@@ -87,24 +88,22 @@ class Vision:
         return mask
     
     # ----- GUI -----
-    def _draw_dash(self, img, gx, gy, x_norm, y_norm, fps, found):
-        
-        line1 = "press q to quit"
-        line2 = f"norm: ({x_norm:.3f}, {y_norm:.3f})" if found else "Norm: (-, -)"
-        line3 = f"fps: {fps:.1f}"
-        
-        y0, dy  = 24, 22
-        for i, text in enumerate( (line2, line3, line1) ):
-            cv2.putText(img, text, (10, y0 + i*dy), cv2.FONT_HERSHEY_PLAIN, 0.8, (225, 225, 225), 2, cv2.LINE_AA)
-            cv2.putText(img, text, (10, y0 + i*dy), cv2.FONT_HERSHEY_PLAIN, 0.8, (0, 0, 0), 1, cv2.LINE_AA)
-            cv2.putText(img, text, (10, y0 + i*dy), cv2.FONT_HERSHEY_PLAIN, 0.8, (0, 0, 0), 1, cv2.LINE_AA)
-            
-        
-        
-        if found and gx is not None and gy is not None:
-            size = 8
-            cv2.line(img, (gx-size, gy), (gx+size, gy), (0,255,0), 1, cv2.LINE_AA)
-            cv2.line(img, (gx, gy-size), (gx, gy+size), (0,255,0), 1, cv2.LINE_AA)
+    def _draw_dash(self, img, gx, gy, x_norm, y_norm, fps, found, pid_x=cfg.PID_X, pid_y=cfg.PID_Y):
+        # top left
+        cv2.putText(img, f"norm: ({x_norm:.3f}, {y_norm:.3f})" if found else "norm: (-, -)", 
+                    (10, 24), cv2.FONT_HERSHEY_PLAIN, 0.8, (0, 225, 0), 1, cv2.LINE_AA)
+        cv2.putText(img, f"fps: {fps:.1f}", (10, 46), cv2.FONT_HERSHEY_PLAIN, 0.8, (0,0,0), 1, cv2.LINE_AA)
+
+        # top right
+        esc_text = "press ESC to quit"
+        text_size = cv2.getTextSize(esc_text, cv2.FONT_HERSHEY_PLAIN, 0.8, 1)[0]
+        cv2.putText(img, esc_text, (img.shape[1]-text_size[0]-10, 24), cv2.FONT_HERSHEY_PLAIN, 0.8, (0,0,0), 1, cv2.LINE_AA)
+
+        # bottom left
+        cv2.putText(img, f"pid_x: {pid_x['kp'], pid_x['ki'], pid_x['kd']}", (10, img.shape[0]-38),
+                    cv2.FONT_HERSHEY_PLAIN, 0.8, (255,255,0), 1, cv2.LINE_AA)
+        cv2.putText(img, f"pid_y: {pid_y['kp'], pid_y['ki'], pid_y['kd']}", (10, img.shape[0]-16),
+                    cv2.FONT_HERSHEY_PLAIN, 0.8, (255,255,0), 1, cv2.LINE_AA)
     
     def _create_panel(self, left_bgr, right_gray):
         h,w = left_bgr.shape[:2]
@@ -178,7 +177,7 @@ class Vision:
                 )
                     
             if showing:
-                cv2.rectangle(frame, (rx, ry), (rx+rw, ry+rh), (255, 0, 0), 1)
+                cv2.rectangle(frame, (rx, ry), (rx+rw, ry+rh), (255, 0, 0), 2)
             
             if showing:
                 h_roi, w_roi = roi_frame.shape[:2]
@@ -196,11 +195,8 @@ class Vision:
                 
             # hotkeys
             key = cv2.waitKey(1) & 0xFF
-            if key == ord('q'):
+            if key == ord('\x1b'):
                 break
-            elif key == ord('s'):
-                # toggle modes
-                showing = not showing
                 
         self.cap.release()
         cv2.destroyAllWindows()
@@ -211,8 +207,6 @@ if __name__ == "__main__":
         print(f"[{t:.2f}] global: ({gx},{gy}) | normalized: ({x_norm:.2f}, {y_norm:.2f})")
     
     vision = Vision(callback=test_callback)
-    
-    print("starting vision test, press 'q' to quit, 's' to toggle display windows.")
     vision.run()
             
         
