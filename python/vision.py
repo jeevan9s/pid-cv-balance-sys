@@ -41,6 +41,7 @@ class Vision:
     # ----- ROI -----
     def _select_roi(self, frame):
         r = cv2.selectROI("select platform ROI & press ENTER", frame, True, False)
+        
         cv2.destroyWindow("select platform ROI & press ENTER")
         x,y,w,h = r
         if w == 0 or h == 0:
@@ -75,10 +76,11 @@ class Vision:
     def _binarize_ball(self, roi_bgr):
         # colour masking
         
-        hsv = cv2.cvtColor(roi_bgr, cv2.COLOR_BGR2HSV)
+        blurred = cv2.GaussianBlur(roi_bgr, (5,5), 0)
+        hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
         
-        lower = np.array([35, 100, 100])
-        upper = np.array([85, 255, 255])
+        lower = np.array([50, 50, 50])
+        upper = np.array([80, 255, 255])
         mask = cv2.inRange(hsv, lower, upper)
         
         # cleaning 
@@ -97,7 +99,7 @@ class Vision:
         # top right
         esc_text = "press ESC to quit"
         text_size = cv2.getTextSize(esc_text, cv2.FONT_HERSHEY_PLAIN, 0.8, 1)[0]
-        cv2.putText(img, esc_text, (img.shape[1]-text_size[0]-10, 24), cv2.FONT_HERSHEY_PLAIN, 0.8, (0,0,0), 1, cv2.LINE_AA)
+        cv2.putText(img, esc_text, (img.shape[1]-text_size[0]-10, 24), cv2.FONT_HERSHEY_PLAIN, 0.8, (0,0,0), 2, cv2.LINE_AA)
 
         # bottom left
         cv2.putText(img, f"pid_x: {pid_x['kp'], pid_x['ki'], pid_x['kd']}", (10, img.shape[0]-38),
@@ -189,6 +191,7 @@ class Vision:
                 self._draw_dash(frame,gx,gy,x_norm,y_norm,fps,found)
                 panel = self._create_panel(frame,vis_bin)
                 
+                cv2.namedWindow("vision (camera | mask)", cv2.WINDOW_NORMAL)    
                 cv2.imshow("vision (camera | mask)", panel)
             else:
                 pass
