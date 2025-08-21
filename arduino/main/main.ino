@@ -1,7 +1,7 @@
 // main Arduino-side program
 
 #include <Servo.h>
-#include <config.h>
+#include "config.h"
 
 // init
 Servo SERVO_X;

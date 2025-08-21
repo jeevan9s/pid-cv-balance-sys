@@ -12,6 +12,7 @@ def main():
     serial = SerialComm()
     pid_controller = None # init after ROI selection
     last_print_time = 0 
+    serial.send_angles(SERVO_X_NEUTRAL, SERVO_Y_NEUTRAL)
     
     def callback(gx, gy, x_norm, y_norm, t):
         nonlocal pid_controller, last_print_time

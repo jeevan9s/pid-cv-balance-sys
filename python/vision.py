@@ -2,6 +2,7 @@
 import cv2
 import numpy as np 
 import time 
+from serial_comm import SerialComm
 from typing import Callable, Optional
 import config as cfg
 
@@ -79,8 +80,8 @@ class Vision:
         blurred = cv2.GaussianBlur(roi_bgr, (5,5), 0)
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
         
-        lower = np.array([85, 80, 80])    
-        upper = np.array([110, 255, 255]) 
+        lower = np.array([85, 80, 80])   
+        upper = np.array([110, 255, 255])
         mask = cv2.inRange(hsv, lower, upper)
         
         # cleaning 
@@ -133,6 +134,7 @@ class Vision:
         
         while True:
             ok, frame = self.cap.read()
+            serial = SerialComm()
             if not ok:
                 break
             
@@ -200,6 +202,9 @@ class Vision:
             key = cv2.waitKey(1) & 0xFF
             if key == ord('\x1b'):
                 break
+            elif key == 32:
+                serial.send_angles(cfg.SERVO_X_NEUTRAL, cfg.SERVO_Y_NEUTRAL)
+                
                 
         self.cap.release()
         cv2.destroyAllWindows()
@@ -214,6 +219,5 @@ if __name__ == "__main__":
             
         
             
-    
-               
+
         
