@@ -11,9 +11,10 @@ def main():
     # init
     serial = SerialComm()
     pid_controller = None # init after ROI selection
+    last_print_time = 0 
     
     def callback(gx, gy, x_norm, y_norm, t):
-        nonlocal pid_controller
+        nonlocal pid_controller, last_print_time
         if pid_controller is None:
             pid_controller = PID(vision.roi[2], vision.roi[3])
             
