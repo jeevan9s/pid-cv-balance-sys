@@ -10,17 +10,14 @@ BAUD_RATE = 115200
 DEFAULT_WIDTH = 640
 DEFAULT_HEIGHT = 480
 CAM_INDEX = 0 
-
 # PID
 # ----------------
-PID_X = {"kp": 3.0, "ki": 0.0, "kd": 1.0}
-PID_Y = {"kp": 3.0, "ki": 0.0, "kd": 1.0}
+PID_X = {"kp": 4.0, "ki": 0.0, "kd": 0.2}
+PID_Y = {"kp": 1.0, "ki": 0.0, "kd": 0.2}
 
-"""
-default 
-PID_X = {"kp":1.0, "ki":0.0, "kd": 0.0}
-PID_Y = {"kp":1.0, "ki":0.0, "kd": 0.0}
-"""
+OUTPUT_SCALE_X = 30  
+OUTPUT_SCALE_Y = 30
+
 
 # SERVO
 # ----------------
@@ -31,3 +28,4 @@ SERVO_X_MAX = 160
 SERVO_X_MIN = 100
 SERVO_Y_MAX = 160
 SERVO_Y_MIN = 100
+

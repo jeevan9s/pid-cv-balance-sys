@@ -38,6 +38,7 @@ class Vision:
         
         self._select_roi(frame)
         self.kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (self.moprh_ksize, self.moprh_ksize)) 
+        self.serial = SerialComm()
         
     # ----- ROI -----
     def _select_roi(self, frame):
@@ -134,7 +135,6 @@ class Vision:
         
         while True:
             ok, frame = self.cap.read()
-            serial = SerialComm()
             if not ok:
                 break
             
@@ -203,19 +203,18 @@ class Vision:
             if key == ord('\x1b'):
                 break
             elif key == 32:
-                serial.send_angles(cfg.SERVO_X_NEUTRAL, cfg.SERVO_Y_NEUTRAL)
-                
+                self.serial.send_angles(cfg.SERVO_X_NEUTRAL, cfg.SERVO_Y_NEUTRAL)
                 
         self.cap.release()
         cv2.destroyAllWindows()
            
 # testing
-if __name__ == "__main__":
-    def test_callback(gx, gy, x_norm, y_norm, t):
-        print(f"[{t:.2f}] global: ({gx},{gy}) | normalized: ({x_norm:.2f}, {y_norm:.2f})")
+# if __name__ == "__main__":
+#     def test_callback(gx, gy, x_norm, y_norm, t):
+#         print(f"[{t:.2f}] global: ({gx},{gy}) | normalized: ({x_norm:.2f}, {y_norm:.2f})")
     
-    vision = Vision(callback=test_callback)
-    vision.run()
+#     vision = Vision(callback=test_callback)
+#     vision.run()
             
         
             
