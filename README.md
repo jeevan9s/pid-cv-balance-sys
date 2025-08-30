@@ -24,7 +24,7 @@ System's design is _modular_, there are 3 main modules.
   <img src="assets/white.jpg" width="250" />
 </p>
 
-2. **CONTROL** computes the motor correction angles with the ball's positional coordinates via the PID algorithm/equation. (python)
+2. <a>**CONTROL**<a> computes the motor correction angles with the ball's positional coordinates via the PID algorithm/equation. (python)
  <p align="left">
   <img src="assets/white.jpg" width="250" />
 </p>
@@ -32,6 +32,13 @@ System's design is _modular_, there are 3 main modules.
 3. **ACTUATION** receives the correction angles, applies smoothing, and writes to each axis motor. (Arduino)
  <p align="left">
   <img src="assets/white.jpg" width="250" />
+</p>
+
+## Diagrams 
+<p>
+  <a href = "assets/pid-cv-vision-workflowdrawio.drawio.png">
+  VISION
+  </a>
 </p>
 
 ## HARDWARE 
