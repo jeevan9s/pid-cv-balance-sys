@@ -29,7 +29,7 @@ System's design is _modular_, there are 3 main modules.
   <img src="assets/white.jpg" width="250" />
 </p>
 
-3. [**ACTUATION**](assets/pid-cv-actuation-workflow (2).drawio.png) receives the correction angles, applies smoothing, and writes to each axis motor. (Arduino)
+3. [**ACTUATION**](assets/pid-cv-actuation-workflow(2).drawio.png) receives the correction angles, applies smoothing, and writes to each axis motor. (Arduino)
  <p align="left">
   <img src="assets/white.jpg" width="250" />
 </p>
