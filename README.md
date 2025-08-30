@@ -19,26 +19,19 @@
 
 System's design is _modular_, there are 3 main modules.
 
-1. **VISION** processes the webcam stream, and detects, tracks, and returns the ball's positional coordinates. (python)
+1. [**VISION**](assets/pid-cv-vision-workflowdrawio.drawio.png) processes the webcam stream, and detects, tracks, and returns the ball's positional coordinates. (python)
 <p align="left">
   <img src="assets/white.jpg" width="250" />
 </p>
 
-2. <a>**CONTROL**<a> computes the motor correction angles with the ball's positional coordinates via the PID algorithm/equation. (python)
+2. [**CONTROL**](assets/pid-cv-control-workflow.drawio.png) computes the motor correction angles with the ball's positional coordinates via the PID algorithm/equation. (python)
  <p align="left">
   <img src="assets/white.jpg" width="250" />
 </p>
 
-3. **ACTUATION** receives the correction angles, applies smoothing, and writes to each axis motor. (Arduino)
+3. [**ACTUATION**](assets/pid-cv-actuation-workflow.drawio.png) receives the correction angles, applies smoothing, and writes to each axis motor. (Arduino)
  <p align="left">
   <img src="assets/white.jpg" width="250" />
-</p>
-
-## Diagrams 
-<p>
-  <a href = "assets/pid-cv-vision-workflowdrawio.drawio.png">
-  VISION
-  </a>
 </p>
 
 ## HARDWARE 
