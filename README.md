@@ -9,7 +9,7 @@
 * [software](#software)
 
 ## DESCRIPTION
-- project with the scope of learning more about control theory and system design (PID), and embedded image processing (openCV).
+- project with the scope of learning and applying control theory and system design (PID), and embedded image processing (openCV).
 - system prevents a ball from falling off a platform by controlling the position of the platform on two axes to keep the ball centered.
   
 - a webcam tracks the ball’s position, feeding x/y coordinates into two PID controllers that compute corrective tilt angles, which are sent to an Arduino program to drive the motors.
@@ -35,7 +35,7 @@ System's design is _modular_, there are 3 main modules.
 </p>
 
 ## HARDWARE 
-_mechanical/structural components were assembled with hand & power tools for wood or designed in CAD software (Fusion360) and 3D-printed._
+_Mechanical/structural components were assembled with hand & power tools for wood or designed in CAD software (Fusion360) and 3D-printed._
 - MCU: ELEGOO UNO R3
 - motors: DS3218MG
 - USB camera: 640x480
@@ -43,7 +43,7 @@ _mechanical/structural components were assembled with hand & power tools for woo
 
 
 ## SOFTWARE
-python and Arduino were used to program the system. 
+Python and Arduino were used to program the system. 
 - serial communication script was used to implement correction angle sending from control side to actuation side. (python -> serial -> arduino)
   
 - languages: Python, Arduino
