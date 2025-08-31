@@ -13,7 +13,7 @@ bool stringComplete = false;
 // smoothing params
 float smoothedX = SERVO_X_NEUTRAL;
 float smoothedY = SERVO_Y_NEUTRAL;
-const float alpha = 0.2;
+const float alpha = ALPHA;
 
 void setup() {
     Serial.begin(BAUD_RATE);

@@ -31,8 +31,8 @@ class Vision:
         
         # params 
         self.blur_ksize = 7
-        self.moprh_ksize = 5
-        self.min_blob_area = 60
+        self.moprh_ksize = 7
+        self.min_blob_area = 300
         self.show_windows = True
         self.callback = callback
         
@@ -61,15 +61,24 @@ class Vision:
         if not contours:
             return None
         
+        # pick largest contour above area
         centroid = max(contours, key=cv2.contourArea)
-        if cv2.contourArea(centroid) < self.min_blob_area:
+        area = cv2.contourArea(centroid)
+        if area < self.min_blob_area:
             return None
+
         
+        perimeter = cv2.arcLength(centroid, True)
+        if perimeter == 0:
+            return None
+        circularity = 4 * np.pi * area / (perimeter * perimeter)
+        if circularity < 0.6:  # reject elongated blobs
+            return None
+
         M = cv2.moments(centroid)
         if M["m00"] == 0:
             return None
         
-        # centroid coordinate calculation
         cx = int(M["m10"] / M["m00"])
         cy = int(M["m01"] / M["m00"])
         return (cx, cy), centroid
@@ -81,8 +90,8 @@ class Vision:
         blurred = cv2.GaussianBlur(roi_bgr, (5,5), 0)
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
         
-        lower = np.array([85, 80, 80])   
-        upper = np.array([110, 255, 255])
+        lower = np.array([90, 120, 80])   # higher S,V → reject dull background blues/greys
+        upper = np.array([105, 255, 255])
         mask = cv2.inRange(hsv, lower, upper)
         
         # cleaning 
@@ -208,7 +217,7 @@ class Vision:
         self.cap.release()
         cv2.destroyAllWindows()
            
-# testing
+
 # if __name__ == "__main__":
 #     def test_callback(gx, gy, x_norm, y_norm, t):
 #         print(f"[{t:.2f}] global: ({gx},{gy}) | normalized: ({x_norm:.2f}, {y_norm:.2f})")

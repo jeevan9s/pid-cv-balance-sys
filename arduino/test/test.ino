@@ -6,11 +6,13 @@ Servo SERVO_X;
 Servo SERVO_Y;
 
 void setup() {
-  Serial.begin(BAUD_RATE);
-  SERVO_X.attach(SERVO_X_PIN);
-  SERVO_Y.attach(SERVO_Y_PIN);
+  Serial.begin(112500);
+  SERVO_X.attach(4);
+  SERVO_Y.attach(2);
 }
 
 void loop() {
-  SERVO_X.write(SERVO_X_NEUTRAL);
+  SERVO_X.write(65);
+  delay(2000);
+  SERVO_Y.write(120);
 }

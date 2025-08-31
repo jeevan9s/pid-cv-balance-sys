@@ -28,6 +28,8 @@ class PID:
     def _compute(self, error:float, prev_error:float, integral: float, kp:float, ki:float, kd:float, dt:float):
         # mono-axis computation 
         integral += error*dt
+        integral = max(min(integral, 1.0), -1.0)
+
         
         if dt > 0:
             derivative = (error - prev_error) / dt

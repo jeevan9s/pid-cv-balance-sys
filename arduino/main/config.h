@@ -7,12 +7,12 @@
  ---------------- */
  #define SERVO_X_PIN 4
  #define SERVO_Y_PIN 2
-
+ #define ALPHA 0.2
 
 /* SERVO POS
  ---------------- */
-#define SERVO_X_NEUTRAL 85
-#define SERVO_Y_NEUTRAL 135
+#define SERVO_X_NEUTRAL 65
+#define SERVO_Y_NEUTRAL 120
 
 #define SERVO_X_MAX 160
 #define SERVO_X_MIN 100
