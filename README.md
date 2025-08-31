@@ -19,12 +19,12 @@
 
 System's design is _modular_, there are 3 main modules.
 
-1. [**VISION**](assets/pid-cv-vision-workflowdrawio.drawio.png) processes the webcam stream, and detects, tracks, and returns the ball's positional coordinates. (python)
+1. [**VISION**](assets/pid-cv-vision-workflowdrawio.drawio.png) processes the webcam stream, and detects, tracks, and returns the ball's positional coordinates. (Python)
 <p align="left">
   <img src="assets/white.jpg" width="250" />
 </p>
 
-2. [**CONTROL**](assets/pid-cv-control-workflow.drawio.png) computes the motor correction angles with the ball's positional coordinates via the PID algorithm/equation. (python)
+2. [**CONTROL**](assets/pid-cv-control-workflow.drawio.png) computes the motor correction angles with the ball's positional coordinates via the PID algorithm/equation. (Python)
  <p align="left">
   <img src="assets/white.jpg" width="250" />
 </p>
@@ -44,7 +44,7 @@ _Mechanical/structural components were assembled with hand & power tools for woo
 
 ## SOFTWARE
 Python and Arduino were used to program the system. 
-- serial communication script was used to implement correction angle sending from control side to actuation side. (python -> serial -> arduino)
+- serial communication script was used to implement correction angle sending from control side to actuation side. (Python -> serial -> arduino)
   
 - languages: Python, Arduino
 - Libraries: openCV, time, Servo
