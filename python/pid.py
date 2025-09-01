@@ -28,7 +28,6 @@ class PID:
     def _compute(self, error:float, prev_error:float, integral: float, kp:float, ki:float, kd:float, dt:float):
         # mono-axis computation 
         integral += error*dt
-        integral = max(min(integral, 1.0), -1.0)
 
         
         if dt > 0:
@@ -44,8 +43,8 @@ class PID:
         dt = curr_time - self.prev_time
         self.prev_time = curr_time
         
-        err_x = 0.5 - cx
-        err_y = 0.5 - cy
+        err_x = self.setpoint_x - cx
+        err_y = self.setpoint_y - cy
         
         output_x, self.integral_x = self._compute(err_x, self.prev_error_x, self.integral_x, self.kp_x, self.ki_x, self.kd_x, dt)
         self.prev_error_x = err_x

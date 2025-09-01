@@ -7,7 +7,7 @@
  ---------------- */
  #define SERVO_X_PIN 4
  #define SERVO_Y_PIN 2
- #define ALPHA 0.2
+ #define ALPHA 1
 
 /* SERVO POS
  ---------------- */

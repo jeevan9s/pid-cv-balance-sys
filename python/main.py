@@ -18,33 +18,39 @@ def main():
     def callback(gx, gy, x_norm, y_norm, t):
         nonlocal last_print_time, pid_controller
 
-        # ignore until PID is ready
         if pid_controller is None:
             return
 
-        # apply dead zone
-        x_input, y_input = x_norm, y_norm
-        if abs(0.5 - x_norm) < DEAD_ZONE:
-            x_input = 0.5
-        if abs(0.5 - y_norm) < DEAD_ZONE:
-            y_input = 0.5
+        # get ROI origin + size
+        rx, ry, rw, rh = vision.roi  
 
-        # compute PID corrections
-        output_x, output_y = pid_controller._compute_2axis(x_input, y_input)
+        # convert to ROI-relative pixels
+        rel_x = gx - rx  
+        rel_y = gy - ry  
 
-        # map to servo angles
+        # apply dead zone (in pixels now)
+        dead_zone_px_x = DEAD_ZONE * rw
+        dead_zone_px_y = DEAD_ZONE * rh
+
+        if abs((rw / 2) - rel_x) < dead_zone_px_x:
+            rel_x = rw / 2
+        if abs((rh / 2) - rel_y) < dead_zone_px_y:
+            rel_y = rh / 2
+
+
+        output_x, output_y = pid_controller._compute_2axis(rel_x, rel_y)
         servo_x, servo_y = pid_controller.run(output_x, output_y)
         serial.send_angles(servo_x, servo_y)
 
-        # periodic printout
+
         if t - last_print_time >= PRINT_INTERVAL:
             last_print_time = t
-            print(f"[{t:.2f}] ball pos: ({gx},{gy}) | servo angles: X={servo_x}, Y={servo_y}")
+            print(f"[{t:.2f}] ball pos(px): ({gx},{gy}) | servo: X={servo_x}, Y={servo_y}")
 
-    # create vision (ROI selection happens here)
+    
     vision = Vision(callback=callback)
 
-    # once ROI is selected, initialize PID with ROI size
+    
     _, _, rw, rh = vision.roi
     pid_controller = PID(
         rw, rh,

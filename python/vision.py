@@ -210,6 +210,7 @@ class Vision:
             # hotkeys
             key = cv2.waitKey(1) & 0xFF
             if key == ord('\x1b'):
+                self.serial.send_angles(cfg.SERVO_X_NEUTRAL, cfg.SERVO_Y_NEUTRAL)
                 break
             elif key == 32:
                 self.serial.send_angles(cfg.SERVO_X_NEUTRAL, cfg.SERVO_Y_NEUTRAL)
