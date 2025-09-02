@@ -9,9 +9,12 @@ the PID controller for each axis takes the error as input, and outputs a correct
 """
 
 class PID:
-    def __init__(self, w:int, h:int, pid_x=cfg.PID_X, pid_y=cfg.PID_Y):
+    def __init__(self, w:int, h:int, pid_x=cfg.PID_X, pid_y=cfg.PID_Y, scale_x=cfg.OUTPUT_SCALE_X, scale_y=cfg.OUTPUT_SCALE_Y):
         self.setpoint_x = w // 2
         self.setpoint_y = h // 2
+        
+        self.scale_x = scale_x
+        self.scale_y = scale_y
         
         self.kp_x, self.ki_x, self.kd_x = pid_x["kp"], pid_x["ki"], pid_x["kd"]
         self.kp_y, self.ki_y, self.kd_y = pid_y["kp"], pid_y["ki"], pid_y["kd"]
@@ -25,6 +28,7 @@ class PID:
     def _compute(self, error:float, prev_error:float, integral: float, kp:float, ki:float, kd:float, dt:float):
         # mono-axis computation 
         integral += error*dt
+
         
         if dt > 0:
             derivative = (error - prev_error) / dt
@@ -58,8 +62,19 @@ class PID:
         return int(angle)
     
     def run(self, output_x:float, output_y:float):
-        servo_x = self._convert_to_servo(output_x, cfg.SERVO_X_NEUTRAL, cfg.SERVO_X_MIN, cfg.SERVO_X_MAX)
-        servo_y = self._convert_to_servo(output_y, cfg.SERVO_Y_NEUTRAL, cfg.SERVO_Y_MIN, cfg.SERVO_Y_MAX)
+        servo_x = self._convert_to_servo(
+            output_x * self.scale_x,
+            cfg.SERVO_X_NEUTRAL,
+            cfg.SERVO_X_MIN,
+            cfg.SERVO_X_MAX
+        )
+
+        servo_y = self._convert_to_servo(
+            output_y * self.scale_y,
+            cfg.SERVO_Y_NEUTRAL,
+            cfg.SERVO_Y_MIN,
+            cfg.SERVO_Y_MAX
+    )
         
         return servo_x, servo_y
         

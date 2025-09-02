@@ -10,6 +10,11 @@ Servo SERVO_Y;
 String inputString = ""; // buffer
 bool stringComplete = false;
 
+// smoothing params
+float smoothedX = SERVO_X_NEUTRAL;
+float smoothedY = SERVO_Y_NEUTRAL;
+const float alpha = ALPHA;
+
 void setup() {
     Serial.begin(BAUD_RATE);
     SERVO_X.attach(SERVO_X_PIN);
@@ -50,7 +55,10 @@ void handleServoCommand(String command) {
   int angleX = command.substring(0, spaceIndex).toInt();
   int angleY = command.substring(spaceIndex + 1).toInt();
 
+  smoothedX = alpha * angleX + (1 - alpha) * smoothedX;
+  smoothedY = alpha * angleY + (1 - alpha) * smoothedY;
+
   
-  SERVO_X.write(angleX);
-  SERVO_Y.write(angleY);
+  SERVO_X.write(int(smoothedX));
+  SERVO_Y.write(int(smoothedY));
 }
