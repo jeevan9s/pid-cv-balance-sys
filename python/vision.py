@@ -90,8 +90,8 @@ class Vision:
         blurred = cv2.GaussianBlur(roi_bgr, (5,5), 0)
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
         
-        lower = np.array([90, 120, 80])   # higher S,V → reject dull background blues/greys
-        upper = np.array([105, 255, 255])
+        lower = np.array([0, 120, 120])
+        upper = np.array([25, 255, 255])
         mask = cv2.inRange(hsv, lower, upper)
         
         # cleaning 
