@@ -87,7 +87,7 @@ The system's design is _modular_, it conists of three sections:
 </details>
 
 ## Firmware 
-System was written in Python and Arduino, using _pyserial_ to connect  both sides. 
+System was written in Python and Arduino, using <a href="https://pypi.org/project/pyserial/">pyserial</a> to connect  both sides. 
 
 Code workflow consists of user selection of the ROI (region of interest), ball binarization, detection, and position extraction. Positions are then sent to the control script to calculate the correctional angles which are sent to the Arduino side via serial to be smoothed and applied to each motor. 
 
