@@ -101,6 +101,9 @@ As seen in the <a href="/firmware/python/">Python</a> directory within <a href="
   <summary>binarize_ball()</summary>
 
 ```py
+# this function is used to "binarize" the ball, converting the ball region into a clean binary mask by highlighting the ball based on its color (orange in my case).
+
+
 def _binarize_ball(self, roi_bgr):
     # colour masking
     blurred = cv2.GaussianBlur(roi_bgr, (5,5), 0)
