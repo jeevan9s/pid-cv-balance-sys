@@ -1,5 +1,7 @@
 # PID-OpenCV Ball Balancing Platform
-> Control system leveraging PID & computer vision to balance a ball on a platform. 
+> Control system leveraging PID & computer vision to balance a ball on a platform.
+
+**WIP**: PID tuning is ongoing. Final results will be added soon.
 
 
 <details>
@@ -17,19 +19,15 @@
 # Overview
 <table width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td rowspan="2" width="66%">
-      <img src="/media/white.jpg" width="100%" height="100%">
+    <td width="50%">
+      <img src="/media/pid-cv-firmware-side.png" style="width:100%; height:auto;">
     </td>
-    <td width="34%">
-      <img src="/media/white.jpg" width="100%">
-    </td>
-  </tr>
-  <tr>
-    <td width="34%">
-      <img src="/media/white.jpg" width="100%">
+    <td width="50%">
+      <img src="/media/pid-cv-testing.gif" style="width:100%; height:auto;">
     </td>
   </tr>
 </table>
+
 
 I built this project to learn and apply control theory and system design (PID), and embedded image processing (openCV).
 
