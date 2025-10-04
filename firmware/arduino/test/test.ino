@@ -1,5 +1,4 @@
 // general testing program
-#include "config.h"
 #include <Servo.h>
 
 Servo SERVO_X;
@@ -12,7 +11,7 @@ void setup() {
 }
 
 void loop() {
-  SERVO_X.write(65);
-  delay(2000);
-  SERVO_Y.write(120);
+  // SERVO_X.write(65);
+  // delay(2000);
+  SERVO_Y.write(100);
 }

@@ -1,8 +1,14 @@
-from config import *
-from serial_comm import SerialComm
-from vision import Vision
-from pid import PID
-import time 
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), 'firmware', 'python'))
+
+from firmware.python.config import *
+from firmware.python.serial_comm import SerialComm
+from firmware.python.vision import Vision
+from firmware.python.pid import PID
+import time
+
 
 PRINT_INTERVAL = 0.1
 DEAD_ZONE = 0.01  # 1% tolerance around center
@@ -11,6 +17,7 @@ def main():
     # init serial
     serial = SerialComm()
     last_print_time = 0
+    time.sleep(3)
     serial.send_angles(SERVO_X_NEUTRAL, SERVO_Y_NEUTRAL)
 
     pid_controller = None  # will init after ROI is known
