@@ -1,6 +1,12 @@
 # serial communication 
 from config import *
-import serial, time
+import time
+
+try:
+    from serial import Serial
+except ImportError:
+    print("Error: pyserial not installed. Run: pip install pyserial")
+    Serial = None
 
 class SerialComm:
     def __init__(self):
@@ -10,7 +16,9 @@ class SerialComm:
     def connect(self):
     
         try:
-            self.ser = serial.Serial(port=SERIAL_PORT, baudrate=BAUD_RATE)
+            if Serial is None:
+                raise ImportError("pyserial not available")
+            self.ser = Serial(port=SERIAL_PORT, baudrate=BAUD_RATE)
             time.sleep(2)
             print("serial communication established")
         except Exception as e:

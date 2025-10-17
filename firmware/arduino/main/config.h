@@ -7,17 +7,18 @@
  ---------------- */
  #define SERVO_X_PIN 4
  #define SERVO_Y_PIN 2
- #define ALPHA 1
+
+ #define ALPHA 0.95
 
 /* SERVO POS
  ---------------- */
-#define SERVO_X_NEUTRAL 65
-#define SERVO_Y_NEUTRAL 120
+#define SERVO_X_NEUTRAL 40
+#define SERVO_Y_NEUTRAL 95
 
-#define SERVO_X_MAX 160
-#define SERVO_X_MIN 100
-#define SERVO_Y_MAX 160
-#define SERVO_Y_MIN 100
+#define SERVO_X_MAX 250
+#define SERVO_X_MIN 20
+#define SERVO_Y_MAX 250
+#define SERVO_Y_MIN 20
 
 
 #define BAUD_RATE 115200

@@ -11,7 +11,7 @@ void setup() {
 }
 
 void loop() {
-  // SERVO_X.write(65);
-  // delay(2000);
-  SERVO_Y.write(100);
+  SERVO_X.write(40);
+  delay(1000);
+  SERVO_Y.write(95);
 }

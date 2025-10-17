@@ -52,7 +52,7 @@ def main():
 
         if t - last_print_time >= PRINT_INTERVAL:
             last_print_time = t
-            print(f"[{t:.2f}] ball pos(px): ({gx},{gy}) | servo: X={servo_x}, Y={servo_y}")
+            # print(f"[{t:.2f}] ball pos(px): ({gx},{gy}) | servo: X={servo_x}, Y={servo_y}")
 
     
     vision = Vision(callback=callback)
